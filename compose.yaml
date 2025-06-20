@@ -1,0 +1,12 @@
+services:
+  mysql:
+    image: mysql:9.3
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/apps/stavi/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: stavi
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      TZ: 'Asia/Taipei'

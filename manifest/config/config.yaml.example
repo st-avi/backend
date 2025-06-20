@@ -12,4 +12,5 @@ logger:
 # https://goframe.org/docs/core/gdb-config-file
 database:
   default:
-    link: "mysql:root:12345678@tcp(127.0.0.1:3306)/test"
+    link: "mysql:root:12345678@tcp(127.0.0.1:3306)/stavi"
+    timezone: "Asia/Taipei"
