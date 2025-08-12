@@ -1,7 +1,7 @@
 services:
   mysql:
     image: mysql:9.3
-    restart: always
+    restart: unless-stopped
     ports:
       - "3306:3306"
     volumes:
@@ -10,3 +10,12 @@ services:
       MYSQL_DATABASE: stavi
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       TZ: 'Asia/Taipei'
+
+  redis:
+    image: redis:8.2
+    restart: unless-stopped
+    ports:
+      - 6379:6379
+    volumes:
+      - ~/apps/stavi/redis/data:/data
+    command: redis-server --requirepass ${REDIS_PASSWORD}
