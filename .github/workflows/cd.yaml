@@ -13,8 +13,7 @@ jobs:
 
   cd:
     needs: call-workflow-lint
-    runs-on:
-      group: Default
+    runs-on: [ self-hosted, Linux, X64, stavi-dev ]
 
     steps:
       - uses: actions/checkout@v5
