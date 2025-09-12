@@ -1,0 +1,74 @@
+name: cd
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  GO_VERSION: '1.24.4'
+
+jobs:
+  call-workflow-lint:
+    uses: ./.github/workflows/lint.yaml
+
+  cd:
+    needs: call-workflow-lint
+    runs-on: [ self-hosted, Linux, X64, stavi-dev ]
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Verify dependencies
+        run: go mod verify
+
+      - name: Build executable
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main main.go
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          install: true
+          platforms: linux/amd64
+
+      - name: Build docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: manifest/docker/Dockerfile
+          load: true
+          tags: backend
+          platforms: linux/amd64
+
+      - name: Save docker image
+        run: |
+          docker save backend -o ./backend.tar
+
+      - name: Upload image to Server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          source: "./backend.tar"
+          target: ${{ secrets.TARGET_PATH }}
+
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+            cd ${{ secrets.TARGET_PATH }}
+            [[ -f compose.yaml ]] && docker compose down
+            docker system prune -f
+            docker rmi backend || true
+            docker load -i ./backend.tar
+            docker compose up -d
