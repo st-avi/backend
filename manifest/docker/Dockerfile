@@ -1,9 +1,9 @@
 FROM alpine:latest
 
-ENV WORKDIR /app
+ENV WORKDIR=/app
 
 ADD ./main $WORKDIR/main
 RUN chmod +x $WORKDIR/main
 
 WORKDIR $WORKDIR
-CMD ./main
+CMD ["./main"]
