@@ -1,14 +1,16 @@
 services:
   mysql:
-    image: mysql:9.3
+    image: postgres:18.1
     restart: unless-stopped
+    shm_size: 128mb
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - ~/apps/stavi/mysql:/var/lib/mysql
+      - ~/apps/stavi/postgresql:/var/lib/postgresql
     environment:
-      MYSQL_DATABASE: stavi
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      POSTGRES_DB: stavi
+      POSTGRES_USER: ${POSTGRESQL_ROOT_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_ROOT_PASSWORD}
       TZ: 'Asia/Taipei'
 
   redis:
