@@ -8,12 +8,12 @@ env:
   GO_VERSION: '1.24.4'
 
 jobs:
-  call-workflow-lint:
+  lint:
     uses: ./.github/workflows/lint.yaml
 
   cd:
-    needs: call-workflow-lint
-    runs-on: [ self-hosted, Linux, X64, stavi-dev ]
+    needs: lint
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v5
