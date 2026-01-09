@@ -11,7 +11,7 @@ jobs:
   lint:
     uses: ./.github/workflows/lint.yaml
 
-  cd:
+  deploy:
     needs: lint
     runs-on: ubuntu-24.04
 
