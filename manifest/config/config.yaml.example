@@ -12,5 +12,5 @@ logger:
 # https://goframe.org/docs/core/gdb-config-file
 database:
   default:
-    link: "pgsql:root:12345678@tcp(127.0.0.1:5432)/stavi"
+    link: "pgsql:root:12345678@127.0.0.1:5432/stavi"
     timezone: "Asia/Taipei"

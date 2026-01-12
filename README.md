@@ -4,6 +4,15 @@
 1. 執行：`make init`
 2. 修改設定檔內的值
 
+## DB Migration
+```bash
+# Up
+go run main.go -migrate up
+
+# Down
+go run main.go -migrate down
+```
+
 ## 許可證
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://github.com/st-avi/backend/blob/main/LICENSE)
 

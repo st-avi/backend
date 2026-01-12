@@ -1,6 +1,6 @@
 module backend
 
-go 1.23.0
+go 1.24.0
 
 toolchain go1.24.4
 
@@ -8,6 +8,7 @@ require (
 	github.com/gogf/gf/contrib/drivers/pgsql/v2 v2.9.6
 	github.com/gogf/gf/contrib/nosql/redis/v2 v2.9.6
 	github.com/gogf/gf/v2 v2.9.6
+	github.com/golang-migrate/migrate/v4 v4.19.1
 )
 
 require (
@@ -38,8 +39,8 @@ require (
 	go.opentelemetry.io/otel/metric v1.38.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.38.0 // indirect
 	go.opentelemetry.io/otel/trace v1.38.0 // indirect
-	golang.org/x/net v0.40.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
-	golang.org/x/text v0.25.0 // indirect
+	golang.org/x/net v0.47.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
+	golang.org/x/text v0.31.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
