@@ -1,16 +1,24 @@
 # https://goframe.org/docs/web/server-config-file-template
 server:
-  address:     ":8000"
+  address: ":8000"
   openapiPath: "/api.json"
   swaggerPath: "/swagger"
 
 # https://goframe.org/docs/core/glog-config
 logger:
-  level : "all"
+  level: "all"
   stdout: true
 
 # https://goframe.org/docs/core/gdb-config-file
 database:
   default:
-    link: "pgsql:root:12345678@127.0.0.1:5432/stavi"
+    host: "127.0.0.1"
+    port: "5432"
+    user: "root"
+    pass: "12345678"
+    name: "stavi"
+    type: "pgsql"
     timezone: "Asia/Taipei"
+
+jwt:
+  secret: "12345678"
