@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"backend/api/auth/v1"
+	v1 "backend/api/auth/v1"
 	"backend/internal/consts"
 	"backend/internal/logic/users"
 	"backend/utility"
@@ -23,7 +23,7 @@ func (c *ControllerV1) Refresh(ctx context.Context, req *v1.RefreshReq) (res *v1
 		return nil, gerror.NewCode(consts.CodeUnauthorized, "無效的 token")
 	}
 
-	userId, err := strconv.Atoi(claims.RegisteredClaims.Subject)
+	userId, err := strconv.Atoi(claims.Subject)
 	if err != nil {
 		r.Response.WriteStatus(http.StatusInternalServerError)
 		return nil, gerror.NewCode(gcode.CodeInternalError)

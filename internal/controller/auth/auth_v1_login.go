@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"backend/api/auth/v1"
+	v1 "backend/api/auth/v1"
 	"backend/internal/consts"
 	"backend/internal/logic/users"
 	"context"

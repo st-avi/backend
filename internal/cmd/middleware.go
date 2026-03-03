@@ -23,6 +23,6 @@ func MiddlewareAuth(r *ghttp.Request) {
 	if err != nil || claims.Purpose != utility.JwtPurposeAccess {
 		r.Response.WriteStatusExit(http.StatusUnauthorized, "無效的 token")
 	}
-	r.SetCtxVar("userId", claims.RegisteredClaims.Subject)
+	r.SetCtxVar("userId", claims.Subject)
 	r.Middleware.Next()
 }
