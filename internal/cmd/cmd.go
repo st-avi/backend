@@ -1,13 +1,13 @@
 package cmd
 
 import (
+	"backend/api"
+	"backend/internal/controller/auth"
 	"context"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
-
-	"backend/internal/controller/hello"
 )
 
 var (
@@ -19,10 +19,16 @@ var (
 			s := g.Server()
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
+				group.Middleware(MiddlewareCORS)
 				group.Bind(
-					hello.NewV1(),
+					auth.NewV1(),
 				)
+				group.Middleware(MiddlewareAuth)
+				group.Bind()
 			})
+			oai := s.GetOpenApi()
+			oai.Config.CommonResponse = api.CommonRes{}
+			oai.Config.CommonResponseDataField = `Data`
 			s.Run()
 			return nil
 		},
