@@ -17,6 +17,7 @@ type DBCfg struct {
 
 var JwtSecret []byte
 var DBDefaultCfg DBCfg
+var CORSAllowDomain []string
 
 func init() {
 	ctx := gctx.New()
@@ -35,4 +36,10 @@ func init() {
 	if err != nil {
 		panic("database.default 解析失敗: " + err.Error())
 	}
+
+	corsAllowDomain, err := gcfg.Instance().Get(ctx, "cors.allowDomain")
+	if err != nil {
+		panic("cors.allowDomain 讀取失敗: " + err.Error())
+	}
+	CORSAllowDomain = corsAllowDomain.Strings()
 }

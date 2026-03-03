@@ -19,9 +19,12 @@ var (
 			s := g.Server()
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
+				group.Middleware(MiddlewareCORS)
 				group.Bind(
 					auth.NewV1(),
 				)
+				group.Middleware(MiddlewareAuth)
+				group.Bind()
 			})
 			oai := s.GetOpenApi()
 			oai.Config.CommonResponse = api.CommonRes{}

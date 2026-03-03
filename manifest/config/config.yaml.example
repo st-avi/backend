@@ -22,3 +22,6 @@ database:
 
 jwt:
   secret: "12345678"
+
+cors:
+  allowDomain: ["localhost", "stavi.tw"]

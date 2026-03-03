@@ -24,8 +24,12 @@ func Login(ctx context.Context, email, password string) (aToken, rToken string, 
 		return "", "", gerror.NewCode(consts.CodeUnauthorized, "信箱或密碼錯誤")
 	}
 
-	aToken, aErr := utility.GenToken(user.Id, utility.JwtPurposeAccess, time.Hour*2)
-	rToken, rErr := utility.GenToken(user.Id, utility.JwtPurposeRefresh, time.Hour*24*7)
+	return GenAuthToken(user.Id)
+}
+
+func GenAuthToken(userId int) (aToken, rToken string, err error) {
+	aToken, aErr := utility.GenToken(userId, utility.JwtPurposeAccess, time.Hour*2)
+	rToken, rErr := utility.GenToken(userId, utility.JwtPurposeRefresh, time.Hour*24*7)
 	if aErr != nil || rErr != nil {
 		return "", "", gerror.NewCode(gcode.CodeInternalError, "Token 生成失敗")
 	}
