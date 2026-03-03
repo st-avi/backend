@@ -5,6 +5,7 @@ import (
 	_ "backend/internal/packed"
 	"backend/utility"
 	"flag"
+	"fmt"
 
 	_ "github.com/gogf/gf/contrib/drivers/pgsql/v2"
 	_ "github.com/gogf/gf/contrib/nosql/redis/v2"
@@ -18,9 +19,11 @@ func main() {
 	switch *migrate {
 	case "up":
 		utility.MigrateUp()
+		fmt.Println("Migration up completed.")
 		return
 	case "down":
 		utility.MigrateDown()
+		fmt.Println("Migration down completed.")
 		return
 	}
 

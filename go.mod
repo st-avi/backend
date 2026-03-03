@@ -8,7 +8,9 @@ require (
 	github.com/gogf/gf/contrib/drivers/pgsql/v2 v2.9.6
 	github.com/gogf/gf/contrib/nosql/redis/v2 v2.9.6
 	github.com/gogf/gf/v2 v2.9.6
+	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/golang-migrate/migrate/v4 v4.19.1
+	golang.org/x/crypto v0.45.0
 )
 
 require (
