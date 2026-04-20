@@ -27,10 +27,10 @@ func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.Log
 	}
 
 	r.Response.Header().Add(
-		"Set-Cookie", "aToken="+aToken+"; HttpOnly; Secure; Max-Age=7200; Path=/;",
+		"Set-Cookie", "aToken="+aToken+"; HttpOnly; Secure; SameSite=Lax; Max-Age=7200; Path=/;",
 	)
 	r.Response.Header().Add(
-		"Set-Cookie", "rToken="+rToken+"; HttpOnly; Secure; Max-Age=604800; Path=/;",
+		"Set-Cookie", "rToken="+rToken+"; HttpOnly; Secure; SameSite=Lax; Max-Age=604800; Path=/;",
 	)
 
 	return &v1.LoginRes{}, nil
