@@ -15,7 +15,7 @@ import (
 func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.LoginRes, err error) {
 	r := ghttp.RequestFromCtx(ctx)
 
-	aToken, rToken, err := users.Login(ctx, req.Email, req.Password)
+	aToken, rToken, err := users.Login(ctx, req.Email, req.Password, req.Totp)
 	if err != nil {
 		switch gerror.Code(err) {
 		case consts.CodeUnauthorized:
