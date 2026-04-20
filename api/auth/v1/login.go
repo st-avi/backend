@@ -11,6 +11,7 @@ type LoginReq struct {
 	g.Meta   `path:"/login" tags:"Auth" summary:"登入" method:"post"`
 	Email    string `json:"email" v:"required|email" dc:"電子郵件地址"`
 	Password string `json:"password" v:"required" dc:"密碼"`
+	Totp     string `json:"totp" v:"required|length:6,6" dc:"TOTP"`
 }
 
 type LoginRes struct {
@@ -24,7 +25,7 @@ func (r LoginRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatusTy
 			Examples: []interface{}{
 				api.CommonRes{
 					Code:    401,
-					Message: "信箱或密碼錯誤",
+					Message: "信箱/密碼/TOTP錯誤",
 					Data:    nil,
 				},
 			},

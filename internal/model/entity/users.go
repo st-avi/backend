@@ -21,4 +21,5 @@ type Users struct {
 	CreatedAt    *gtime.Time `json:"createdAt"    orm:"created_at"    description:""` //
 	UpdatedAt    *gtime.Time `json:"updatedAt"    orm:"updated_at"    description:""` //
 	DeletedAt    *gtime.Time `json:"deletedAt"    orm:"deleted_at"    description:""` //
+	TotpSecret   string      `json:"totpSecret"   orm:"totp_secret"   description:""` //
 }

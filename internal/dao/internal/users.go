@@ -32,6 +32,7 @@ type UsersColumns struct {
 	CreatedAt    string //
 	UpdatedAt    string //
 	DeletedAt    string //
+	TotpSecret   string //
 }
 
 // usersColumns holds the columns for the table users.
@@ -47,6 +48,7 @@ var usersColumns = UsersColumns{
 	CreatedAt:    "created_at",
 	UpdatedAt:    "updated_at",
 	DeletedAt:    "deleted_at",
+	TotpSecret:   "totp_secret",
 }
 
 // NewUsersDao creates and returns a new DAO object for table data access.
