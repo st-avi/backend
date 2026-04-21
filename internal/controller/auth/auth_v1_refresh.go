@@ -36,10 +36,10 @@ func (c *ControllerV1) Refresh(ctx context.Context, req *v1.RefreshReq) (res *v1
 	}
 
 	r.Response.Header().Add(
-		"Set-Cookie", "aToken="+aToken+"; HttpOnly; Secure; SameSite=Lax; Max-Age=7200; Path=/;",
+		"Set-Cookie", "aToken="+aToken+"; HttpOnly; Secure; Max-Age=7200; Path=/; Domain=stavi.tw;",
 	)
 	r.Response.Header().Add(
-		"Set-Cookie", "rToken="+rToken+"; HttpOnly; Secure; SameSite=Lax; Max-Age=604800; Path=/;",
+		"Set-Cookie", "rToken="+rToken+"; HttpOnly; Secure; Max-Age=604800; Path=/; Domain=stavi.tw;",
 	)
 
 	return &v1.RefreshRes{}, nil
