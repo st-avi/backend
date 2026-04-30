@@ -8,7 +8,8 @@ import (
 )
 
 type RefreshReq struct {
-	g.Meta `path:"/refresh" tags:"Auth" summary:"刷新 Token" method:"post"`
+	g.Meta `path:"/refresh" tags:"Auth" sm:"刷新 Token" dc:"使用 rToken 來獲取新的 aToken、rToken" method:"post"`
+	RToken string `json:"rToken" in:"cookie" v:"required" dc:"刷新用 Token"`
 }
 
 type RefreshRes struct {
@@ -21,7 +22,7 @@ func (r RefreshRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatus
 			Response: struct{}{},
 			Examples: []interface{}{
 				api.CommonRes{
-					Code:    401,
+					Code:    61,
 					Message: "無效的 token",
 					Data:    nil,
 				},
