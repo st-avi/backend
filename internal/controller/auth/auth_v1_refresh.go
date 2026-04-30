@@ -2,7 +2,7 @@ package auth
 
 import (
 	v1 "backend/api/auth/v1"
-	"backend/internal/logic/users"
+	"backend/internal/logic/user"
 	"backend/utility"
 	"context"
 	"net/http"
@@ -28,7 +28,7 @@ func (c *ControllerV1) Refresh(ctx context.Context, req *v1.RefreshReq) (res *v1
 		return nil, gerror.NewCode(gcode.CodeInternalError)
 	}
 
-	aToken, rToken, err := users.GenAuthToken(userId)
+	aToken, rToken, err := user.GenAuthToken(userId)
 	if err != nil {
 		r.Response.WriteStatus(http.StatusInternalServerError)
 		return nil, err
