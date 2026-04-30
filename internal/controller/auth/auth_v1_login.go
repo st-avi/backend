@@ -2,7 +2,6 @@ package auth
 
 import (
 	v1 "backend/api/auth/v1"
-	"backend/internal/consts"
 	"backend/internal/logic/users"
 	"context"
 	"net/http"
@@ -18,10 +17,8 @@ func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.Log
 	aToken, rToken, err := users.Login(ctx, req.Email, req.Password, req.Totp)
 	if err != nil {
 		switch gerror.Code(err) {
-		case consts.CodeUnauthorized:
+		case gcode.CodeNotAuthorized:
 			r.Response.Status = http.StatusUnauthorized
-		case gcode.CodeInternalError:
-			r.Response.Status = http.StatusInternalServerError
 		}
 		return nil, err
 	}

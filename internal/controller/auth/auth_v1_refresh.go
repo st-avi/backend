@@ -2,7 +2,6 @@ package auth
 
 import (
 	v1 "backend/api/auth/v1"
-	"backend/internal/consts"
 	"backend/internal/logic/users"
 	"backend/utility"
 	"context"
@@ -20,7 +19,7 @@ func (c *ControllerV1) Refresh(ctx context.Context, req *v1.RefreshReq) (res *v1
 	claims, err := utility.ParseToken(r.Cookie.Get("rToken").String())
 	if err != nil || claims.Purpose != utility.JwtPurposeRefresh {
 		r.Response.WriteStatus(http.StatusUnauthorized)
-		return nil, gerror.NewCode(consts.CodeUnauthorized, "無效的 token")
+		return nil, gerror.NewCode(gcode.CodeNotAuthorized, "無效的 token")
 	}
 
 	userId, err := strconv.Atoi(claims.Subject)
