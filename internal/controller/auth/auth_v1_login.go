@@ -2,7 +2,7 @@ package auth
 
 import (
 	v1 "backend/api/auth/v1"
-	"backend/internal/logic/users"
+	"backend/internal/logic/user"
 	"context"
 	"net/http"
 
@@ -14,7 +14,7 @@ import (
 func (c *ControllerV1) Login(ctx context.Context, req *v1.LoginReq) (res *v1.LoginRes, err error) {
 	r := ghttp.RequestFromCtx(ctx)
 
-	aToken, rToken, err := users.Login(ctx, req.Email, req.Password, req.Totp)
+	aToken, rToken, err := user.Login(ctx, req.Email, req.Password, req.Totp)
 	if err != nil {
 		switch gerror.Code(err) {
 		case gcode.CodeNotAuthorized:
