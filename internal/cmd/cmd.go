@@ -3,11 +3,14 @@ package cmd
 import (
 	"backend/api"
 	"backend/internal/controller/auth"
+	"backend/internal/jobs"
 	"context"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
+	"github.com/gogf/gf/v2/os/gcron"
+	"github.com/gogf/gf/v2/os/glog"
 )
 
 var (
@@ -16,6 +19,13 @@ var (
 		Usage: "main",
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
+			_, err = gcron.Add(ctx, "@every 30m", func(ctx context.Context) {
+				_ = jobs.CleanCacheTable()
+			}, "Clean cache table")
+			if err != nil {
+				glog.Errorf(ctx, "Clean cache table error: %v", err)
+			}
+
 			s := g.Server()
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
