@@ -2,7 +2,9 @@ package v1
 
 import (
 	"backend/api"
+	"net/http"
 
+	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/goai"
 )
@@ -18,11 +20,11 @@ type RefreshRes struct {
 
 func (r RefreshRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatusType) {
 	return map[int]goai.EnhancedStatusType{
-		401: {
+		http.StatusUnauthorized: {
 			Response: struct{}{},
 			Examples: []interface{}{
 				api.CommonRes{
-					Code:    61,
+					Code:    gcode.CodeNotAuthorized.Code(),
 					Message: "無效的 token",
 					Data:    nil,
 				},
