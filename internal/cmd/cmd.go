@@ -3,6 +3,7 @@ package cmd
 import (
 	"backend/api"
 	"backend/internal/controller/auth"
+	"backend/internal/controller/user"
 	"backend/internal/jobs"
 	"context"
 
@@ -32,6 +33,7 @@ var (
 				group.Middleware(MiddlewareCORS)
 				group.Bind(
 					auth.NewV1(),
+					user.NewV1().CreateUser,
 				)
 				group.Middleware(MiddlewareAuth)
 				group.Bind()
