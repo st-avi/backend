@@ -32,11 +32,14 @@ var (
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.Middleware(MiddlewareCORS)
 				group.Bind(
-					auth.NewV1(),
+					auth.NewV1().Login,
+					auth.NewV1().Refresh,
 					user.NewV1().CreateUser,
 				)
 				group.Middleware(MiddlewareAuth)
-				group.Bind()
+				group.Bind(
+					auth.NewV1().AuthMe,
+				)
 			})
 			oai := s.GetOpenApi()
 			oai.Config.CommonResponse = api.CommonRes{}

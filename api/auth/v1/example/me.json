@@ -1,0 +1,12 @@
+[
+  {
+    "code": 0,
+    "message": "OK",
+    "data": {
+      "username": "Smallten",
+      "email": "",
+      "role": "user",
+      "avatar": ""
+    }
+  }
+]
