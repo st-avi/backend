@@ -15,8 +15,9 @@ type DBCfg struct {
 	Timezone string `json:"timezone"`
 }
 
-var JwtSecret []byte
 var DBDefaultCfg DBCfg
+var JwtSecret []byte
+var JwtDomain string
 var CORSAllowDomain []string
 
 func init() {
@@ -27,6 +28,12 @@ func init() {
 		panic("jwt.secret 讀取失敗: " + err.Error())
 	}
 	JwtSecret = secret.Bytes()
+
+	jwtDomain, err := gcfg.Instance().Get(ctx, "jwt.domain")
+	if err != nil {
+		panic("jwt.domain 讀取失敗: " + err.Error())
+	}
+	JwtDomain = jwtDomain.String()
 
 	dbDefault, err := gcfg.Instance().Get(ctx, "database.default")
 	if err != nil {

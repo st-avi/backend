@@ -7,6 +7,7 @@ import (
 	"context"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
@@ -34,12 +35,16 @@ func (c *ControllerV1) Refresh(ctx context.Context, req *v1.RefreshReq) (res *v1
 		return nil, err
 	}
 
-	r.Response.Header().Add(
-		"Set-Cookie", "aToken="+aToken+"; HttpOnly; Secure; Max-Age=7200; Path=/; Domain=stavi.tw;",
-	)
-	r.Response.Header().Add(
-		"Set-Cookie", "rToken="+rToken+"; HttpOnly; Secure; Max-Age=604800; Path=/; Domain=stavi.tw;",
-	)
+	r.Cookie.SetCookie("aToken", aToken, utility.JwtDomain, "/", 2*time.Hour, ghttp.CookieOptions{
+		SameSite: http.SameSiteStrictMode,
+		Secure:   true,
+		HttpOnly: true,
+	})
+	r.Cookie.SetCookie("rToken", rToken, utility.JwtDomain, "/", 7*24*time.Hour, ghttp.CookieOptions{
+		SameSite: http.SameSiteStrictMode,
+		Secure:   true,
+		HttpOnly: true,
+	})
 
 	return &v1.RefreshRes{}, nil
 }
