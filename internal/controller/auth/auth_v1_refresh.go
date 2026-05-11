@@ -19,6 +19,7 @@ func (c *ControllerV1) Refresh(ctx context.Context, req *v1.RefreshReq) (res *v1
 
 	claims, err := utility.ParseToken(r.Cookie.Get("rToken").String())
 	if err != nil || claims.Purpose != utility.JwtPurposeRefresh {
+		r.Cookie.Remove("rToken")
 		r.Response.WriteStatus(http.StatusUnauthorized)
 		return nil, gerror.NewCode(gcode.CodeNotAuthorized, "無效的 token")
 	}
