@@ -36,10 +36,19 @@ var (
 					auth.NewV1().Refresh,
 					user.NewV1().CreateUser,
 				)
-				group.Middleware(MiddlewareAuth)
-				group.Bind(
-					auth.NewV1().AuthMe,
-				)
+				group.Group("/", func(authGroup *ghttp.RouterGroup) {
+					authGroup.Middleware(MiddlewareAuth)
+					authGroup.Bind(
+						auth.NewV1().AuthMe,
+					)
+				})
+				group.Group("/admin", func(adminGroup *ghttp.RouterGroup) {
+					adminGroup.Middleware(MiddlewareAuth)
+					adminGroup.Middleware(MiddlewareAdmin)
+					adminGroup.Bind(
+						user.NewV1().GetUsers,
+					)
+				})
 			})
 			oai := s.GetOpenApi()
 			oai.Config.CommonResponse = api.CommonRes{}

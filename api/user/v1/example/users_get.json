@@ -1,0 +1,19 @@
+[
+  {
+    "code": 0,
+    "message": "OK",
+    "data": {
+      "users": [
+        {
+          "id": 1,
+          "username": "Smallten",
+          "email": "",
+          "phone_country": "",
+          "phone_number": "",
+          "role": "admin",
+          "avatar": ""
+        }
+      ]
+    }
+  }
+]

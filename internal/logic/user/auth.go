@@ -1,6 +1,7 @@
 package user
 
 import (
+	"backend/internal/consts"
 	"backend/internal/dao"
 	"backend/internal/model/entity"
 	"backend/utility"
@@ -9,6 +10,7 @@ import (
 
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/frame/g"
 )
 
 func Login(ctx context.Context, email, password, totp string) (aToken, rToken string, err error) {
@@ -34,4 +36,12 @@ func GenAuthToken(userId int) (aToken, rToken string, err error) {
 		return "", "", gerror.NewCode(gcode.CodeInternalError, "Token 生成失敗")
 	}
 	return aToken, rToken, nil
+}
+
+func IsAdmin(userId int) (isAdmin bool, err error) {
+	roleId, err := g.Model("users").Fields("role_id").Where("id", userId).Value()
+	if err != nil {
+		return false, err
+	}
+	return int(consts.RoleAdmin) == roleId.Int(), nil
 }
