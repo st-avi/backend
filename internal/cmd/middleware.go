@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"backend/internal/logic/user"
 	"backend/utility"
 	"net/http"
 
@@ -34,5 +35,18 @@ func MiddlewareAuth(r *ghttp.Request) {
 		})
 	}
 	r.SetCtxVar("userId", claims.Subject)
+	r.Middleware.Next()
+}
+
+func MiddlewareAdmin(r *ghttp.Request) {
+	userId := r.GetCtxVar("userId").Int()
+	isAdmin, err := user.IsAdmin(userId)
+	if err != nil || !isAdmin {
+		r.Response.Status = http.StatusForbidden
+		r.Response.WriteJsonExit(ghttp.DefaultHandlerResponse{
+			Code:    gcode.CodeNotAuthorized.Code(),
+			Message: "需要管理員權限",
+		})
+	}
 	r.Middleware.Next()
 }
