@@ -20,19 +20,21 @@ func main() {
 	flag.IntVar(&version, "force", 0, "force set migration version")
 	flag.Parse()
 
-	migration := utility.MigrateNew()
-	if up {
-		migration.MigrateUp()
-		fmt.Println("Migration up completed.")
-		return
-	} else if down {
-		migration.MigrateDown()
-		fmt.Println("Migration down completed.")
-		return
-	} else if version > 0 {
-		migration.Force(version)
-		fmt.Println("Migration force completed.")
-		return
+	if up || down || version > 0 {
+		migration := utility.MigrateNew()
+		if up {
+			migration.MigrateUp()
+			fmt.Println("Migration up completed.")
+			return
+		} else if down {
+			migration.MigrateDown()
+			fmt.Println("Migration down completed.")
+			return
+		} else if version > 0 {
+			migration.Force(version)
+			fmt.Println("Migration force completed.")
+			return
+		}
 	}
 
 	cmd.Main.Run(gctx.GetInitCtx())
