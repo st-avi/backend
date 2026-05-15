@@ -4,13 +4,13 @@ import (
 	v1 "backend/api/user/v1"
 	"backend/internal/consts"
 	"backend/internal/dao"
-	"backend/internal/logic/cache"
 	"backend/internal/logic/user"
 	"context"
 	"net/http"
 
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	disposable "github.com/rocketlaunchr/anti-disposable-email"
 )
@@ -38,12 +38,12 @@ func (c *ControllerV1) CreateUser(ctx context.Context, req *v1.CreateUserReq) (r
 
 	// 檢查 Email 驗證碼
 	verifyCacheKey := consts.CacheKeyVerifyCreateUser + req.Email
-	verifyCache, err := cache.Get(verifyCacheKey)
-	if err != nil || verifyCache.IsEmpty() {
+	verifyCache, err := g.Redis().Get(ctx, verifyCacheKey)
+	if err != nil {
 		r.Response.Status = http.StatusUnprocessableEntity
 		return nil, gerror.NewCode(gcode.CodeValidationFailed, "Email 驗證碼已過期或不存在")
 	}
-	if req.VerifyEmailCode != verifyCache["value"].String() {
+	if req.VerifyEmailCode != verifyCache.String() {
 		r.Response.Status = http.StatusUnprocessableEntity
 		return nil, gerror.NewCode(gcode.CodeValidationFailed, "Email 驗證碼錯誤")
 	}
@@ -56,7 +56,10 @@ func (c *ControllerV1) CreateUser(ctx context.Context, req *v1.CreateUserReq) (r
 	}
 
 	// 清理 Email 驗證碼
-	_ = cache.Del(verifyCacheKey)
+	_, err = g.Redis().Del(ctx, verifyCacheKey)
+	if err != nil {
+		g.Log().Error(ctx, "清理 Email 驗證碼失敗: ", err)
+	}
 
 	return &v1.CreateUserRes{}, nil
 }

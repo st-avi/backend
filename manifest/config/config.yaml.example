@@ -20,6 +20,12 @@ database:
     type: "pgsql"
     timezone: "Asia/Taipei"
 
+# https://goframe.org/docs/components/contrib-nosql-redis-config
+redis:
+  default:
+    address: "127.0.0.1:6379"
+    pass: "12345678"
+
 jwt:
   secret: "12345678"
   domain: "localhost"
