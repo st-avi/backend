@@ -13,17 +13,25 @@ import (
 )
 
 func main() {
-	migrate := flag.String("migrate", "", "database migrate command: up / down")
+	var up, down bool
+	var version int
+	flag.BoolVar(&up, "up", false, "migrate up to newest")
+	flag.BoolVar(&down, "down", false, "migrate down to oldest")
+	flag.IntVar(&version, "force", 0, "force set migration version")
 	flag.Parse()
 
-	switch *migrate {
-	case "up":
-		utility.MigrateUp()
+	migration := utility.MigrateNew()
+	if up {
+		migration.MigrateUp()
 		fmt.Println("Migration up completed.")
 		return
-	case "down":
-		utility.MigrateDown()
+	} else if down {
+		migration.MigrateDown()
 		fmt.Println("Migration down completed.")
+		return
+	} else if version > 0 {
+		migration.Force(version)
+		fmt.Println("Migration force completed.")
 		return
 	}
 
