@@ -30,6 +30,7 @@ var (
 					authGroup.Middleware(MiddlewareAuth)
 					authGroup.Bind(
 						auth.NewV1().AuthMe,
+						auth.NewV1().Logout,
 					)
 				})
 				group.Group("/admin", func(adminGroup *ghttp.RouterGroup) {
