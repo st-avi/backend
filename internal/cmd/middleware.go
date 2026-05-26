@@ -27,7 +27,7 @@ func MiddlewareAuth(r *ghttp.Request) {
 	aToken := r.Cookie.Get("aToken").String()
 	claims, err := utility.ParseToken(aToken)
 	if err != nil || claims.Purpose != utility.JwtPurposeAccess {
-		r.Cookie.Remove("aToken")
+		r.Cookie.RemoveCookie("aToken", utility.JwtDomain, "/")
 		r.Response.Status = http.StatusUnauthorized
 		r.Response.WriteJsonExit(ghttp.DefaultHandlerResponse{
 			Code:    gcode.CodeNotAuthorized.Code(),

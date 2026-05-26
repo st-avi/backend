@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/gogf/gf/v2/util/guid"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -28,6 +29,7 @@ func GenToken(userId int, purpose JwtPurpose, expireTime time.Duration) (string,
 		ExpiresAt: jwt.NewNumericDate(time.Now().Add(expireTime)),
 		NotBefore: jwt.NewNumericDate(time.Now()),
 		IssuedAt:  jwt.NewNumericDate(time.Now()),
+		ID:        guid.S(),
 	}}
 	return jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString(JwtSecret)
 }
