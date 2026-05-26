@@ -45,3 +45,17 @@ func IsAdmin(userId int) (isAdmin bool, err error) {
 	}
 	return int(consts.RoleAdmin) == roleId.Int(), nil
 }
+
+func SetCacheAuthRTokenJTI(ctx context.Context, rToken string) error {
+	rClaims, err := utility.ParseToken(rToken)
+	if err != nil {
+		return err
+	}
+	err = g.Redis().SetEX(ctx, consts.CacheAuthRTokenJTI+rClaims.ID,
+		g.Map{
+			"uid": rClaims.Subject,
+		},
+		int64(7*24*time.Hour.Seconds()),
+	)
+	return err
+}
