@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"backend/api"
+	"backend/internal/controller/article"
 	"backend/internal/controller/auth"
 	"backend/internal/controller/user"
 	"context"
@@ -25,6 +26,7 @@ var (
 					auth.NewV1().Login,
 					auth.NewV1().Refresh,
 					user.NewV1().CreateUser,
+					article.NewV1().GetArticles,
 				)
 				group.Group("/", func(authGroup *ghttp.RouterGroup) {
 					authGroup.Middleware(MiddlewareAuth)
