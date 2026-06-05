@@ -1,0 +1,22 @@
+[
+  {
+    "code": 0,
+    "message": "OK",
+    "data": {
+      "tags": [
+        {
+          "name": "C",
+          "slug": "c"
+        },
+        {
+          "name": "Go",
+          "slug": "go"
+        },
+        {
+          "name": "Pve",
+          "slug": "pve"
+        }
+      ]
+    }
+  }
+]
