@@ -27,6 +27,7 @@ var (
 					auth.NewV1().Refresh,
 					user.NewV1().CreateUser,
 					article.NewV1().GetArticles,
+					article.NewV1().GetArticles10,
 				)
 				group.Group("/", func(authGroup *ghttp.RouterGroup) {
 					authGroup.Middleware(MiddlewareAuth)
