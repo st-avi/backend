@@ -29,6 +29,7 @@ var (
 					article.NewV1().GetArticles,
 					article.NewV1().GetArticles10,
 					article.NewV1().GetTags,
+					article.NewV1().GetArticle,
 				)
 				group.Group("/", func(authGroup *ghttp.RouterGroup) {
 					authGroup.Middleware(MiddlewareAuth)
