@@ -19,6 +19,7 @@ var DBDefaultCfg DBCfg
 var JwtSecret []byte
 var JwtDomain string
 var CORSAllowDomain []string
+var S3Url string
 
 func init() {
 	ctx := gctx.New()
@@ -49,4 +50,10 @@ func init() {
 		panic("cors.allowDomain 讀取失敗: " + err.Error())
 	}
 	CORSAllowDomain = corsAllowDomain.Strings()
+
+	s3Url, err := gcfg.Instance().Get(ctx, "s3.url")
+	if err != nil {
+		panic("s3.url 讀取失敗: " + err.Error())
+	}
+	S3Url = s3Url.String()
 }

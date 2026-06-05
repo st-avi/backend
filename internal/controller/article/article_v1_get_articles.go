@@ -28,6 +28,7 @@ func (c *ControllerV1) GetArticles(ctx context.Context, req *v1.GetArticlesReq) 
 	articles, err := dao.Articles.Ctx(ctx).As("a").
 		Fields("a.title, a.slug, c.name").
 		LeftJoin("categories c", "c.id = a.category_id").
+		Where("a.status", consts.ArticlePublished).
 		Order("a.category_id ASC, a.id ASC").
 		All()
 	if err != nil {
