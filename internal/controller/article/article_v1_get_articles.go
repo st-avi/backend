@@ -26,7 +26,7 @@ func (c *ControllerV1) GetArticles(ctx context.Context, req *v1.GetArticlesReq) 
 	}
 
 	articles, err := dao.Articles.Ctx(ctx).As("a").
-		Fields("a.title, a.slug, c.name").
+		Fields("a.title, a.slug, c.name, c.slug as category_slug").
 		LeftJoin("categories c", "c.id = a.category_id").
 		Where("a.status", consts.ArticlePublished).
 		Order("a.id DESC").
@@ -38,9 +38,10 @@ func (c *ControllerV1) GetArticles(ctx context.Context, req *v1.GetArticlesReq) 
 
 	for _, article := range articles {
 		resList = append(resList, v1.GetArticlesData{
-			Category: article["name"].String(),
-			Title:    article["title"].String(),
-			Slug:     article["slug"].String(),
+			Category:     article["name"].String(),
+			CategorySlug: article["category_slug"].String(),
+			Title:        article["title"].String(),
+			Slug:         article["slug"].String(),
 		})
 	}
 
