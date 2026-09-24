@@ -6,11 +6,13 @@
       "list": [
         {
           "category": "C語言",
+          "category_slug": "c",
           "title": "Arithmetic",
           "slug": "c-02"
         },
         {
           "category": "C語言",
+          "category_slug": "c",
           "title": "Your first program",
           "slug": "c-01"
         }

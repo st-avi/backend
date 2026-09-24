@@ -3,9 +3,10 @@ package v1
 import "github.com/gogf/gf/v2/frame/g"
 
 type GetArticlesData struct {
-	Category string `json:"category"`
-	Title    string `json:"title"`
-	Slug     string `json:"slug"`
+	Category     string `json:"category"`
+	CategorySlug string `json:"category_slug"`
+	Title        string `json:"title"`
+	Slug         string `json:"slug"`
 }
 
 type GetArticlesReq struct {
