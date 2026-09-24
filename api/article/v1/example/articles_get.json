@@ -3,19 +3,16 @@
     "code": 0,
     "message": "OK",
     "data": {
-      "categories": [
+      "list": [
         {
-          "name": "C語言",
-          "articles": [
-            {
-              "title": "Your first program",
-              "slug": "c-01"
-            },
-            {
-              "title": "Arithmetic",
-              "slug": "c-02"
-            }
-          ]
+          "category": "C語言",
+          "title": "Arithmetic",
+          "slug": "c-02"
+        },
+        {
+          "category": "C語言",
+          "title": "Your first program",
+          "slug": "c-01"
         }
       ]
     }

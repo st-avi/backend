@@ -2,14 +2,10 @@ package v1
 
 import "github.com/gogf/gf/v2/frame/g"
 
-type GetArticlesResArticle struct {
-	Title string `json:"title"`
-	Slug  string `json:"slug"`
-}
-
-type GetArticlesResCategory struct {
-	Name     string                  `json:"name"`
-	Articles []GetArticlesResArticle `json:"articles"`
+type GetArticlesData struct {
+	Category string `json:"category"`
+	Title    string `json:"title"`
+	Slug     string `json:"slug"`
 }
 
 type GetArticlesReq struct {
@@ -17,6 +13,6 @@ type GetArticlesReq struct {
 }
 
 type GetArticlesRes struct {
-	g.Meta     `status:"200" resEg:"api/article/v1/example/articles_get.json"`
-	Categories []GetArticlesResCategory `json:"categories"`
+	g.Meta `status:"200" resEg:"api/article/v1/example/articles_get.json"`
+	List   []GetArticlesData `json:"list"`
 }
