@@ -14,7 +14,7 @@ type LogoutReq struct {
 }
 
 type LogoutRes struct {
-	g.Meta `status:"200" resEg:"api/auth/v1/example/logout.json"`
+	g.Meta `status:"200" resEg:"api/example/auth/v1/logout.json"`
 }
 
 func (r LogoutRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatusType) {

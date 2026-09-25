@@ -15,7 +15,7 @@ type RefreshReq struct {
 }
 
 type RefreshRes struct {
-	g.Meta `status:"200" resEg:"api/auth/v1/example/refresh.json"`
+	g.Meta `status:"200" resEg:"api/example/auth/v1/refresh.json"`
 }
 
 func (r RefreshRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatusType) {

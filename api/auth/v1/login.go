@@ -17,7 +17,7 @@ type LoginReq struct {
 }
 
 type LoginRes struct {
-	g.Meta `status:"200" resEg:"api/auth/v1/example/login.json"`
+	g.Meta `status:"200" resEg:"api/example/auth/v1/login.json"`
 }
 
 func (r LoginRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatusType) {

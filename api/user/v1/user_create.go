@@ -20,7 +20,7 @@ type CreateUserReq struct {
 }
 
 type CreateUserRes struct {
-	g.Meta `status:"200" resEg:"api/user/v1/example/user_create.json"`
+	g.Meta `status:"200" resEg:"api/example/user/v1/user_create.json"`
 }
 
 func (r CreateUserRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatusType) {

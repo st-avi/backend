@@ -15,7 +15,7 @@ type AuthMeReq struct {
 }
 
 type AuthMeRes struct {
-	g.Meta   `status:"200" resEg:"api/auth/v1/example/me.json"`
+	g.Meta   `status:"200" resEg:"api/example/auth/v1/me.json"`
 	Username string `json:"username"`
 	Email    string `json:"email"`
 	Role     string `json:"role"`
