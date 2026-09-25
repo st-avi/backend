@@ -20,13 +20,14 @@ type GetArticleReq struct {
 }
 
 type GetArticleRes struct {
-	g.Meta     `status:"200" resEg:"api/article/v1/example/article_get.json"`
-	Title      string             `json:"title"`
-	Summary    string             `json:"summary"`
-	Content    string             `json:"content"`
-	CoverImage string             `json:"cover_image"`
-	Category   string             `json:"category"`
-	Tags       []GetArticelResTag `json:"tags"`
+	g.Meta      `status:"200" resEg:"api/article/v1/example/article_get.json"`
+	Title       string             `json:"title"`
+	Summary     string             `json:"summary"`
+	Content     string             `json:"content"`
+	CoverImage  string             `json:"cover_image"`
+	PublishedAt string             `json:"published_at"`
+	Category    string             `json:"category"`
+	Tags        []GetArticelResTag `json:"tags"`
 }
 
 func (r GetArticleRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatusType) {

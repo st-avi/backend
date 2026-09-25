@@ -26,7 +26,7 @@ func (c *ControllerV1) GetArticle(ctx context.Context, req *v1.GetArticleReq) (r
 	}
 
 	article, err := dao.Articles.Ctx(ctx).As("a").
-		Fields("a.id, a.title, a.summary, a.content, a.cover_image, c.name").
+		Fields("a.id, a.title, a.summary, a.content, a.cover_image, a.published_at, c.name").
 		LeftJoin("categories c", "c.id = a.category_id").
 		Where("a.status", consts.ArticlePublished).
 		Where("a.slug", req.Slug).
@@ -49,12 +49,13 @@ func (c *ControllerV1) GetArticle(ctx context.Context, req *v1.GetArticleReq) (r
 	}
 
 	resData = v1.GetArticleRes{
-		Title:      article["title"].String(),
-		Summary:    article["summary"].String(),
-		Content:    article["content"].String(),
-		CoverImage: filepath.Join(utility.S3Url, article["cover_image"].String()),
-		Category:   article["name"].String(),
-		Tags:       resTags,
+		Title:       article["title"].String(),
+		Summary:     article["summary"].String(),
+		Content:     article["content"].String(),
+		CoverImage:  filepath.Join(utility.S3Url, article["cover_image"].String()),
+		PublishedAt: article["published_at"].Time().Format("2006-01-02 15:04:05"),
+		Category:    article["name"].String(),
+		Tags:        resTags,
 	}
 
 	_, _ = g.Redis().Set(ctx, consts.CacheArticleInfo+req.Slug, resData)
