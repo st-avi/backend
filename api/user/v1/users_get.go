@@ -24,7 +24,7 @@ type GetUsersReq struct {
 }
 
 type GetUsersRes struct {
-	g.Meta `status:"200" resEg:"api/user/v1/example/users_get.json"`
+	g.Meta `status:"200" resEg:"api/example/user/v1/users_get.json"`
 	Users  []GetUsersResUser `json:"users"`
 }
 

@@ -12,6 +12,6 @@ type GetTagsReq struct {
 }
 
 type GetTagsRes struct {
-	g.Meta `status:"200" resEg:"api/article/v1/example/tags_get.json"`
+	g.Meta `status:"200" resEg:"api/example/article/v1/tags_get.json"`
 	Tags   []GetTagsResTag `json:"tags"`
 }

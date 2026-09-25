@@ -20,7 +20,7 @@ type GetArticleReq struct {
 }
 
 type GetArticleRes struct {
-	g.Meta      `status:"200" resEg:"api/article/v1/example/article_get.json"`
+	g.Meta      `status:"200" resEg:"api/example/article/v1/article_get.json"`
 	Title       string             `json:"title"`
 	Summary     string             `json:"summary"`
 	Content     string             `json:"content"`

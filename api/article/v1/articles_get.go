@@ -14,6 +14,6 @@ type GetArticlesReq struct {
 }
 
 type GetArticlesRes struct {
-	g.Meta `status:"200" resEg:"api/article/v1/example/articles_get.json"`
+	g.Meta `status:"200" resEg:"api/example/article/v1/articles_get.json"`
 	List   []GetArticlesData `json:"list"`
 }
