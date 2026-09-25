@@ -31,4 +31,7 @@ jwt:
   domain: "localhost"
 
 cors:
-  allowDomain: ["localhost", "stavi.tw"]
+  allowDomain: [""]
+
+s3:
+  url: ""
