@@ -1,0 +1,14 @@
+[
+  {
+    "code": 0,
+    "message": "OK",
+    "data": {
+      "categories": [
+        {
+          "name": "C語言",
+          "slug": "c"
+        }
+      ]
+    }
+  }
+]
