@@ -1,6 +1,7 @@
 package article
 
 import (
+	v1 "backend/api/article/v1"
 	"backend/internal/consts"
 	"backend/internal/dao"
 	"context"
@@ -10,8 +11,6 @@ import (
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
-
-	"backend/api/article/v1"
 )
 
 func (c *ControllerV1) GetCategories(ctx context.Context, req *v1.GetCategoriesReq) (res *v1.GetCategoriesRes, err error) {
