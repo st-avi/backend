@@ -1,0 +1,17 @@
+#!/bin/bash
+# 有 staged 的 .go 檔案時才執行 golangci-lint
+
+if ! git diff --cached --name-only --diff-filter=ACMR | grep -q '\.go$'; then
+  exit 0
+fi
+
+if ! command -v golangci-lint >/dev/null 2>&1; then
+  echo "golangci-lint 未安裝，請先安裝。"
+  exit 1
+fi
+
+echo "Running golangci-lint..."
+if ! golangci-lint run ./...; then
+  echo "golangci-lint 檢查失敗，請修正後再 commit（緊急時可用 git commit --no-verify 略過）"
+  exit 1
+fi
