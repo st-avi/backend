@@ -26,10 +26,11 @@ var (
 					auth.NewV1().Login,
 					auth.NewV1().Refresh,
 					user.NewV1().CreateUser,
-					article.NewV1().GetArticles,
-					article.NewV1().GetArticles10,
-					article.NewV1().GetTags,
 					article.NewV1().GetArticle,
+					article.NewV1().GetArticles10,
+					article.NewV1().GetArticles,
+					article.NewV1().GetCategories,
+					article.NewV1().GetTags,
 				)
 				group.Group("/", func(authGroup *ghttp.RouterGroup) {
 					authGroup.Middleware(MiddlewareAuth)
