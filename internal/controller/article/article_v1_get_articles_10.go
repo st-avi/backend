@@ -7,7 +7,6 @@ import (
 	"backend/utility"
 	"context"
 	"net/http"
-	"path/filepath"
 
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
@@ -45,7 +44,7 @@ func (c *ControllerV1) GetArticles10(ctx context.Context, req *v1.GetArticles10R
 			Title:      article["title"].String(),
 			Slug:       article["slug"].String(),
 			Summary:    article["summary"].String(),
-			CoverImage: filepath.Join(utility.S3Url, article["cover_image"].String()),
+			CoverImage: utility.S3Url + article["cover_image"].String(),
 		})
 	}
 
