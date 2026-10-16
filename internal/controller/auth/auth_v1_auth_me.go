@@ -5,6 +5,7 @@ import (
 	"backend/internal/consts"
 	"backend/internal/dao"
 	"backend/internal/model/entity"
+	"backend/utility"
 	"context"
 	"net/http"
 
@@ -27,6 +28,6 @@ func (c *ControllerV1) AuthMe(ctx context.Context, req *v1.AuthMeReq) (res *v1.A
 		Username: user.Username,
 		Email:    user.Email,
 		Role:     consts.Role(user.RoleId).String(),
-		Avatar:   user.Avatar,
+		Avatar:   utility.S3Url + user.Avatar,
 	}, nil
 }
