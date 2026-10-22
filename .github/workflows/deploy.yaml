@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 env:
-  GO_VERSION: '1.25.0'
+  GO_VERSION: '1.27.3'
 
 jobs:
   lint:
@@ -13,7 +13,7 @@ jobs:
 
   deploy:
     needs: lint
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - uses: actions/checkout@v7
