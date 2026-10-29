@@ -30,6 +30,7 @@ var (
 					article.NewV1().GetArticles10,
 					article.NewV1().GetArticles,
 					article.NewV1().GetCategories,
+					article.NewV1().GetCategory,
 					article.NewV1().GetTags,
 				)
 				group.Group("/", func(authGroup *ghttp.RouterGroup) {
