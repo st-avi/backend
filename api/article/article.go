@@ -16,5 +16,6 @@ type IArticleV1 interface {
 	GetArticles(ctx context.Context, req *v1.GetArticlesReq) (res *v1.GetArticlesRes, err error)
 	GetCategories(ctx context.Context, req *v1.GetCategoriesReq) (res *v1.GetCategoriesRes, err error)
 	GetCategory(ctx context.Context, req *v1.GetCategoryReq) (res *v1.GetCategoryRes, err error)
+	GetTag(ctx context.Context, req *v1.GetTagReq) (res *v1.GetTagRes, err error)
 	GetTags(ctx context.Context, req *v1.GetTagsReq) (res *v1.GetTagsRes, err error)
 }

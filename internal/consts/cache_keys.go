@@ -9,5 +9,6 @@ const (
 	CacheArticleTags       = "article:tags"       // 文章標籤
 	CacheArticleCategories = "article:categories" // 文章系列
 	CacheArticleCategory   = "article:category:"  // 系列文章列表
+	CacheArticleTag        = "article:tag:"       // 標籤文章列表
 	CacheArticleInfo       = "article:info:"      // 文章資訊
 )
