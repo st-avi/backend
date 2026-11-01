@@ -41,12 +41,12 @@ jobs:
           context: .
           file: manifest/docker/Dockerfile
           load: true
-          tags: backend
+          tags: backend:dev
           platforms: linux/amd64
 
       - name: Save docker image
         run: |
-          docker save backend -o ./backend.tar
+          docker save backend:dev -o ./backend-dev.tar
 
       - name: Upload image to Server
         uses: appleboy/scp-action@v1
@@ -56,7 +56,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source: "./backend.tar,./api/example"
+          source: "./backend-dev.tar,./api/example"
           target: ${{ secrets.TARGET_PATH }}
 
       - name: Deploy to Server
@@ -71,6 +71,6 @@ jobs:
             cd ${{ secrets.TARGET_PATH }}
             [[ -f compose.yaml ]] && docker compose down
             docker system prune -f
-            docker rmi backend || true
-            docker load -i ./backend.tar
+            docker rmi backend:dev || true
+            docker load -i ./backend-dev.tar
             docker compose up -d
