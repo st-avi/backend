@@ -46,6 +46,7 @@ var (
 					adminGroup.Middleware(MiddlewareAdmin)
 					adminGroup.Bind(
 						user.NewV1().GetUsers,
+						article.NewV1().CreateArticle,
 					)
 				})
 			})
