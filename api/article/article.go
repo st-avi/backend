@@ -13,6 +13,8 @@ import (
 type IArticleV1 interface {
 	GetAdminArticle(ctx context.Context, req *v1.GetAdminArticleReq) (res *v1.GetAdminArticleRes, err error)
 	GetAdminArticles(ctx context.Context, req *v1.GetAdminArticlesReq) (res *v1.GetAdminArticlesRes, err error)
+	GetAdminCategories(ctx context.Context, req *v1.GetAdminCategoriesReq) (res *v1.GetAdminCategoriesRes, err error)
+	GetAdminTags(ctx context.Context, req *v1.GetAdminTagsReq) (res *v1.GetAdminTagsRes, err error)
 	CreateArticle(ctx context.Context, req *v1.CreateArticleReq) (res *v1.CreateArticleRes, err error)
 	DeleteArticle(ctx context.Context, req *v1.DeleteArticleReq) (res *v1.DeleteArticleRes, err error)
 	GetArticle(ctx context.Context, req *v1.GetArticleReq) (res *v1.GetArticleRes, err error)

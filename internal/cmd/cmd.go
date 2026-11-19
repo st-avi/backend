@@ -51,6 +51,8 @@ var (
 						article.NewV1().GetAdminArticles,
 						article.NewV1().GetAdminArticle,
 						article.NewV1().DeleteArticle,
+						article.NewV1().GetAdminCategories,
+						article.NewV1().GetAdminTags,
 					)
 				})
 			})

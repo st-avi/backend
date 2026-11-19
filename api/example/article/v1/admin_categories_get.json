@@ -1,0 +1,22 @@
+[
+  {
+    "code": 0,
+    "message": "OK",
+    "data": {
+      "categories": [
+        {
+          "id": 1,
+          "name": "C語言",
+          "slug": "c",
+          "article_count": 2
+        },
+        {
+          "id": 2,
+          "name": "Go",
+          "slug": "go",
+          "article_count": 0
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "code": 0,
+    "message": "OK",
+    "data": {
+      "tags": [
+        {
+          "id": 1,
+          "name": "入門",
+          "slug": "beginner",
+          "article_count": 3
+        },
+        {
+          "id": 2,
+          "name": "指標",
+          "slug": "pointer",
+          "article_count": 0
+        }
+      ]
+    }
+  }
+]
