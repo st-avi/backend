@@ -50,6 +50,7 @@ var (
 						article.NewV1().UpdateArticle,
 						article.NewV1().GetAdminArticles,
 						article.NewV1().GetAdminArticle,
+						article.NewV1().DeleteArticle,
 					)
 				})
 			})

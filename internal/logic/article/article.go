@@ -91,3 +91,12 @@ func UpdateArticle(ctx context.Context, req v1.UpdateArticleReq, tagIds []int, f
 		return err
 	})
 }
+
+func TrashArticle(ctx context.Context, id int) error {
+	cols := dao.Articles.Columns()
+	_, err := dao.Articles.Ctx(ctx).
+		Data(cols.Status, consts.ArticleTrashed).
+		Where(cols.Id, id).
+		Update()
+	return err
+}
