@@ -5,6 +5,7 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/gogf/gf/v2/database/gdb"
 	"github.com/gogf/gf/v2/errors/gcode"
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/net/ghttp"
@@ -52,4 +53,23 @@ func checkTags(ctx context.Context, r *ghttp.Request, ids []int) (tagIds []int, 
 		tagSlugs = append(tagSlugs, tag["slug"].String())
 	}
 	return tagIds, tagSlugs, nil
+}
+
+func checkNameSlugExist(r *ghttp.Request, m *gdb.Model, name, slug, label string) error {
+	rows, err := m.Fields("name, slug").Where("name", name).WhereOr("slug", slug).All()
+	if err != nil {
+		r.Response.Status = http.StatusInternalServerError
+		return gerror.NewCode(gcode.CodeInternalError)
+	}
+	for _, row := range rows {
+		if row["name"].String() == name {
+			r.Response.Status = http.StatusConflict
+			return gerror.NewCode(gcode.CodeBusinessValidationFailed, label+"名稱已存在")
+		}
+	}
+	if len(rows) > 0 {
+		r.Response.Status = http.StatusConflict
+		return gerror.NewCode(gcode.CodeBusinessValidationFailed, label+" Slug 已存在")
+	}
+	return nil
 }

@@ -100,3 +100,19 @@ func TrashArticle(ctx context.Context, id int) error {
 		Update()
 	return err
 }
+
+func CreateCategory(ctx context.Context, req v1.CreateCategoryReq) (id int, err error) {
+	lastId, err := dao.Categories.Ctx(ctx).Data(do.Categories{
+		Name: req.Name,
+		Slug: req.Slug,
+	}).InsertAndGetId()
+	return int(lastId), err
+}
+
+func CreateTag(ctx context.Context, req v1.CreateTagReq) (id int, err error) {
+	lastId, err := dao.Tags.Ctx(ctx).Data(do.Tags{
+		Name: req.Name,
+		Slug: req.Slug,
+	}).InsertAndGetId()
+	return int(lastId), err
+}

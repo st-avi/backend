@@ -53,6 +53,8 @@ var (
 						article.NewV1().DeleteArticle,
 						article.NewV1().GetAdminCategories,
 						article.NewV1().GetAdminTags,
+						article.NewV1().CreateCategory,
+						article.NewV1().CreateTag,
 					)
 				})
 			})

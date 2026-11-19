@@ -1,0 +1,11 @@
+[
+  {
+    "code": 0,
+    "message": "OK",
+    "data": {
+      "id": 2,
+      "name": "Go",
+      "slug": "go"
+    }
+  }
+]
