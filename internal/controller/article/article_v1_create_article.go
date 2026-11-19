@@ -28,44 +28,14 @@ func (c *ControllerV1) CreateArticle(ctx context.Context, req *v1.CreateArticleR
 		return nil, gerror.NewCode(gcode.CodeBusinessValidationFailed, "文章 Slug 已存在")
 	}
 
-	// 檢查系列是否存在
-	var categorySlug string
-	if req.CategoryId > 0 {
-		category, err := dao.Categories.Ctx(ctx).Fields("slug").Where("id", req.CategoryId).One()
-		if err != nil {
-			r.Response.Status = http.StatusInternalServerError
-			return nil, gerror.NewCode(gcode.CodeInternalError)
-		}
-		if category.IsEmpty() {
-			r.Response.Status = http.StatusUnprocessableEntity
-			return nil, gerror.NewCode(gcode.CodeBusinessValidationFailed, "找不到系列")
-		}
-		categorySlug = category["slug"].String()
+	// 檢查系列與標籤是否存在
+	categorySlug, err := checkCategory(ctx, r, req.CategoryId)
+	if err != nil {
+		return nil, err
 	}
-
-	// 去除重複的標籤 ID 並檢查是否都存在
-	tagIds := make([]int, 0, len(req.TagIds))
-	seen := make(map[int]struct{}, len(req.TagIds))
-	for _, id := range req.TagIds {
-		if _, ok := seen[id]; !ok {
-			seen[id] = struct{}{}
-			tagIds = append(tagIds, id)
-		}
-	}
-	var tagSlugs []string
-	if len(tagIds) > 0 {
-		tags, err := dao.Tags.Ctx(ctx).Fields("slug").WhereIn("id", tagIds).All()
-		if err != nil {
-			r.Response.Status = http.StatusInternalServerError
-			return nil, gerror.NewCode(gcode.CodeInternalError)
-		}
-		if len(tags) != len(tagIds) {
-			r.Response.Status = http.StatusUnprocessableEntity
-			return nil, gerror.NewCode(gcode.CodeBusinessValidationFailed, "找不到部分標籤")
-		}
-		for _, tag := range tags {
-			tagSlugs = append(tagSlugs, tag["slug"].String())
-		}
+	tagIds, tagSlugs, err := checkTags(ctx, r, req.TagIds)
+	if err != nil {
+		return nil, err
 	}
 
 	// 新增文章
