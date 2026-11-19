@@ -11,6 +11,7 @@ import (
 )
 
 type IArticleV1 interface {
+	GetAdminArticle(ctx context.Context, req *v1.GetAdminArticleReq) (res *v1.GetAdminArticleRes, err error)
 	GetAdminArticles(ctx context.Context, req *v1.GetAdminArticlesReq) (res *v1.GetAdminArticlesRes, err error)
 	CreateArticle(ctx context.Context, req *v1.CreateArticleReq) (res *v1.CreateArticleRes, err error)
 	GetArticle(ctx context.Context, req *v1.GetArticleReq) (res *v1.GetArticleRes, err error)
