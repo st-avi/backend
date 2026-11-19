@@ -18,7 +18,6 @@ func (c *ControllerV1) GetAdminArticle(ctx context.Context, req *v1.GetAdminArti
 	cols := dao.Articles.Columns()
 	var a *entity.Articles
 	err = dao.Articles.Ctx(ctx).
-		FieldsEx(cols.SearchVector).
 		Where(cols.Id, req.Id).
 		Scan(&a)
 	if err != nil {

@@ -21,34 +21,32 @@ type ArticlesDao struct {
 
 // ArticlesColumns defines and stores column names for the table articles.
 type ArticlesColumns struct {
-	Id           string //
-	CategoryId   string //
-	Title        string //
-	Slug         string //
-	Summary      string //
-	Content      string //
-	CoverImage   string //
-	Status       string //
-	PublishedAt  string //
-	CreatedAt    string //
-	UpdatedAt    string //
-	SearchVector string //
+	Id          string //
+	CategoryId  string //
+	Title       string //
+	Slug        string //
+	Summary     string //
+	Content     string //
+	CoverImage  string //
+	Status      string //
+	PublishedAt string //
+	CreatedAt   string //
+	UpdatedAt   string //
 }
 
 // articlesColumns holds the columns for the table articles.
 var articlesColumns = ArticlesColumns{
-	Id:           "id",
-	CategoryId:   "category_id",
-	Title:        "title",
-	Slug:         "slug",
-	Summary:      "summary",
-	Content:      "content",
-	CoverImage:   "cover_image",
-	Status:       "status",
-	PublishedAt:  "published_at",
-	CreatedAt:    "created_at",
-	UpdatedAt:    "updated_at",
-	SearchVector: "search_vector",
+	Id:          "id",
+	CategoryId:  "category_id",
+	Title:       "title",
+	Slug:        "slug",
+	Summary:     "summary",
+	Content:     "content",
+	CoverImage:  "cover_image",
+	Status:      "status",
+	PublishedAt: "published_at",
+	CreatedAt:   "created_at",
+	UpdatedAt:   "updated_at",
 }
 
 // NewArticlesDao creates and returns a new DAO object for table data access.

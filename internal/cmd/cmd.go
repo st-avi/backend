@@ -33,6 +33,7 @@ var (
 					article.NewV1().GetCategory,
 					article.NewV1().GetTag,
 					article.NewV1().GetTags,
+					article.NewV1().SearchArticles,
 				)
 				group.Group("/", func(authGroup *ghttp.RouterGroup) {
 					authGroup.Middleware(MiddlewareAuth)
