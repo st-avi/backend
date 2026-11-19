@@ -25,7 +25,15 @@ func (c *ControllerV1) GetTags(ctx context.Context, req *v1.GetTagsReq) (res *v1
 		}, nil
 	}
 
-	tags, err := dao.Tags.Ctx(ctx).Fields("name, slug").Order("id ASC").All()
+	publishedTagIds := dao.ArticleTags.Ctx(ctx).As("at").
+		Fields("at.tag_id").
+		InnerJoin("articles a", "a.id = at.article_id").
+		Where("a.status", consts.ArticlePublished)
+	tags, err := dao.Tags.Ctx(ctx).
+		Fields("name, slug").
+		Where("id IN (?)", publishedTagIds).
+		Order("id ASC").
+		All()
 	if err != nil {
 		r.Response.Status = http.StatusInternalServerError
 		return nil, gerror.NewCode(gcode.CodeInternalError, "取得文章標籤失敗")

@@ -25,7 +25,15 @@ func (c *ControllerV1) GetCategories(ctx context.Context, req *v1.GetCategoriesR
 		}, nil
 	}
 
-	categories, err := dao.Categories.Ctx(ctx).Fields("name, slug").Order("id ASC").All()
+	publishedCategoryIds := dao.Articles.Ctx(ctx).
+		Fields("category_id").
+		Where("status", consts.ArticlePublished).
+		WhereNotNull("category_id")
+	categories, err := dao.Categories.Ctx(ctx).
+		Fields("name, slug").
+		Where("id IN (?)", publishedCategoryIds).
+		Order("id ASC").
+		All()
 	if err != nil {
 		r.Response.Status = http.StatusInternalServerError
 		return nil, gerror.NewCode(gcode.CodeInternalError, "取得文章系列失敗")

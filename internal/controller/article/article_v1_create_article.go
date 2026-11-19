@@ -78,7 +78,12 @@ func (c *ControllerV1) CreateArticle(ctx context.Context, req *v1.CreateArticleR
 
 	// 直接發佈時清除前台相關快取
 	if consts.ArticleStatus(req.Status) == consts.ArticlePublished {
-		cacheKeys := []string{consts.CacheArticleList10, consts.CacheArticleListALL}
+		cacheKeys := []string{
+			consts.CacheArticleList10,
+			consts.CacheArticleListALL,
+			consts.CacheArticleCategories,
+			consts.CacheArticleTags,
+		}
 		if categorySlug != "" {
 			cacheKeys = append(cacheKeys, consts.CacheArticleCategory+categorySlug)
 		}
