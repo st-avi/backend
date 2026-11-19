@@ -32,7 +32,7 @@ func (r UpdateArticleRes) EnhanceResponseStatus() (resList map[int]goai.Enhanced
 	return map[int]goai.EnhancedStatusType{
 		http.StatusUnauthorized: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeNotAuthorized.Code(),
 					Message: "無效的 token",
@@ -42,7 +42,7 @@ func (r UpdateArticleRes) EnhanceResponseStatus() (resList map[int]goai.Enhanced
 		},
 		http.StatusForbidden: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeNotAuthorized.Code(),
 					Message: "需要管理員權限",
@@ -52,7 +52,7 @@ func (r UpdateArticleRes) EnhanceResponseStatus() (resList map[int]goai.Enhanced
 		},
 		http.StatusNotFound: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeNotFound.Code(),
 					Message: "找不到文章",
@@ -62,7 +62,7 @@ func (r UpdateArticleRes) EnhanceResponseStatus() (resList map[int]goai.Enhanced
 		},
 		http.StatusConflict: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeBusinessValidationFailed.Code(),
 					Message: "文章 Slug 已存在",
@@ -72,7 +72,7 @@ func (r UpdateArticleRes) EnhanceResponseStatus() (resList map[int]goai.Enhanced
 		},
 		http.StatusUnprocessableEntity: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeBusinessValidationFailed.Code(),
 					Message: "找不到系列",

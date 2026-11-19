@@ -1,0 +1,31 @@
+[
+  {
+    "code": 0,
+    "message": "OK",
+    "data": {
+      "list": [
+        {
+          "id": 2,
+          "title": "Arithmetic",
+          "slug": "c-02",
+          "status": "draft",
+          "category": "C語言",
+          "category_slug": "c",
+          "published_at": null,
+          "updated_at": "2026-11-19 10:30:00"
+        },
+        {
+          "id": 1,
+          "title": "Your first program",
+          "slug": "c-01",
+          "status": "published",
+          "category": "C語言",
+          "category_slug": "c",
+          "published_at": "2026-11-18 09:00:00",
+          "updated_at": "2026-11-18 09:00:00"
+        }
+      ],
+      "total": 2
+    }
+  }
+]

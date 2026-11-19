@@ -48,6 +48,7 @@ var (
 						user.NewV1().GetUsers,
 						article.NewV1().CreateArticle,
 						article.NewV1().UpdateArticle,
+						article.NewV1().GetAdminArticles,
 					)
 				})
 			})
