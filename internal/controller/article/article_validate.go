@@ -55,8 +55,14 @@ func checkTags(ctx context.Context, r *ghttp.Request, ids []int) (tagIds []int, 
 	return tagIds, tagSlugs, nil
 }
 
-func checkNameSlugExist(r *ghttp.Request, m *gdb.Model, name, slug, label string) error {
-	rows, err := m.Fields("name, slug").Where("name", name).WhereOr("slug", slug).All()
+func checkNameSlugExist(r *ghttp.Request, m *gdb.Model, excludeId int, name, slug, label string) error {
+	m = m.Fields("name, slug").Where(
+		m.Builder().Where("name", name).WhereOr("slug", slug),
+	)
+	if excludeId > 0 {
+		m = m.WhereNot("id", excludeId)
+	}
+	rows, err := m.All()
 	if err != nil {
 		r.Response.Status = http.StatusInternalServerError
 		return gerror.NewCode(gcode.CodeInternalError)

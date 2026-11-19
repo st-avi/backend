@@ -55,6 +55,8 @@ var (
 						article.NewV1().GetAdminTags,
 						article.NewV1().CreateCategory,
 						article.NewV1().CreateTag,
+						article.NewV1().UpdateCategory,
+						article.NewV1().UpdateTag,
 					)
 				})
 			})

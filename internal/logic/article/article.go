@@ -116,3 +116,19 @@ func CreateTag(ctx context.Context, req v1.CreateTagReq) (id int, err error) {
 	}).InsertAndGetId()
 	return int(lastId), err
 }
+
+func UpdateCategory(ctx context.Context, req v1.UpdateCategoryReq) error {
+	_, err := dao.Categories.Ctx(ctx).Data(do.Categories{
+		Name: req.Name,
+		Slug: req.Slug,
+	}).Where(dao.Categories.Columns().Id, req.Id).Update()
+	return err
+}
+
+func UpdateTag(ctx context.Context, req v1.UpdateTagReq) error {
+	_, err := dao.Tags.Ctx(ctx).Data(do.Tags{
+		Name: req.Name,
+		Slug: req.Slug,
+	}).Where(dao.Tags.Columns().Id, req.Id).Update()
+	return err
+}

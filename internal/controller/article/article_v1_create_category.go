@@ -16,7 +16,7 @@ import (
 func (c *ControllerV1) CreateCategory(ctx context.Context, req *v1.CreateCategoryReq) (res *v1.CreateCategoryRes, err error) {
 	r := ghttp.RequestFromCtx(ctx)
 
-	if err := checkNameSlugExist(r, dao.Categories.Ctx(ctx), req.Name, req.Slug, "系列"); err != nil {
+	if err := checkNameSlugExist(r, dao.Categories.Ctx(ctx), 0, req.Name, req.Slug, "系列"); err != nil {
 		return nil, err
 	}
 

@@ -24,7 +24,9 @@ type IArticleV1 interface {
 	GetCategories(ctx context.Context, req *v1.GetCategoriesReq) (res *v1.GetCategoriesRes, err error)
 	CreateCategory(ctx context.Context, req *v1.CreateCategoryReq) (res *v1.CreateCategoryRes, err error)
 	GetCategory(ctx context.Context, req *v1.GetCategoryReq) (res *v1.GetCategoryRes, err error)
+	UpdateCategory(ctx context.Context, req *v1.UpdateCategoryReq) (res *v1.UpdateCategoryRes, err error)
 	CreateTag(ctx context.Context, req *v1.CreateTagReq) (res *v1.CreateTagRes, err error)
 	GetTag(ctx context.Context, req *v1.GetTagReq) (res *v1.GetTagRes, err error)
+	UpdateTag(ctx context.Context, req *v1.UpdateTagReq) (res *v1.UpdateTagRes, err error)
 	GetTags(ctx context.Context, req *v1.GetTagsReq) (res *v1.GetTagsRes, err error)
 }

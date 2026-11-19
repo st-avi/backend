@@ -16,7 +16,7 @@ import (
 func (c *ControllerV1) CreateTag(ctx context.Context, req *v1.CreateTagReq) (res *v1.CreateTagRes, err error) {
 	r := ghttp.RequestFromCtx(ctx)
 
-	if err := checkNameSlugExist(r, dao.Tags.Ctx(ctx), req.Name, req.Slug, "標籤"); err != nil {
+	if err := checkNameSlugExist(r, dao.Tags.Ctx(ctx), 0, req.Name, req.Slug, "標籤"); err != nil {
 		return nil, err
 	}
 
