@@ -77,7 +77,7 @@ func (c *ControllerV1) SearchArticles(ctx context.Context, req *v1.SearchArticle
 			Title:        article["title"].String(),
 			Slug:         article["slug"].String(),
 			Summary:      article["summary"].String(),
-			CoverImage:   utility.S3Url + article["cover_image"].String(),
+			CoverImage:   utility.S3FileUrl(article["cover_image"].String()),
 			PublishedAt:  article["published_at"].Time().Format("2006-01-02 15:04:05"),
 		})
 	}

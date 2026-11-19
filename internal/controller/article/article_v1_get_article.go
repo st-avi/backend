@@ -51,7 +51,7 @@ func (c *ControllerV1) GetArticle(ctx context.Context, req *v1.GetArticleReq) (r
 		Title:       article["title"].String(),
 		Summary:     article["summary"].String(),
 		Content:     article["content"].String(),
-		CoverImage:  utility.S3Url + article["cover_image"].String(),
+		CoverImage:  utility.S3FileUrl(article["cover_image"].String()),
 		PublishedAt: article["published_at"].Time().Format("2006-01-02 15:04:05"),
 		Category:    article["name"].String(),
 		Tags:        resTags,

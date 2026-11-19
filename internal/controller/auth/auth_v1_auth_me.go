@@ -28,6 +28,6 @@ func (c *ControllerV1) AuthMe(ctx context.Context, req *v1.AuthMeReq) (res *v1.A
 		Username: user.Username,
 		Email:    user.Email,
 		Role:     consts.Role(user.RoleId).String(),
-		Avatar:   utility.S3Url + user.Avatar,
+		Avatar:   utility.S3FileUrl(user.Avatar),
 	}, nil
 }
