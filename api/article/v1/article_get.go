@@ -34,7 +34,7 @@ func (r GetArticleRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedSta
 	return map[int]goai.EnhancedStatusType{
 		http.StatusNotFound: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeNotFound.Code(),
 					Message: "找不到文章",

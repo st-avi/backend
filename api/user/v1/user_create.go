@@ -27,7 +27,7 @@ func (r CreateUserRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedSta
 	return map[int]goai.EnhancedStatusType{
 		http.StatusConflict: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeBusinessValidationFailed.Code(),
 					Message: "Email 已經被註冊",
@@ -37,7 +37,7 @@ func (r CreateUserRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedSta
 		},
 		http.StatusUnprocessableEntity: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeBusinessValidationFailed.Code(),
 					Message: "不允許使用一次性信箱",

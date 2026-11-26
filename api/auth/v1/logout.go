@@ -21,7 +21,7 @@ func (r LogoutRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatusT
 	return map[int]goai.EnhancedStatusType{
 		http.StatusUnauthorized: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeNotAuthorized.Code(),
 					Message: "無效的 token",

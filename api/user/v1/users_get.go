@@ -32,7 +32,7 @@ func (r GetUsersRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatu
 	return map[int]goai.EnhancedStatusType{
 		http.StatusUnauthorized: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeNotAuthorized.Code(),
 					Message: "無效的 token",
@@ -42,7 +42,7 @@ func (r GetUsersRes) EnhanceResponseStatus() (resList map[int]goai.EnhancedStatu
 		},
 		http.StatusForbidden: {
 			Response: struct{}{},
-			Examples: []interface{}{
+			Examples: []any{
 				api.CommonRes{
 					Code:    gcode.CodeNotAuthorized.Code(),
 					Message: "需要管理員權限",
